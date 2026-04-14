@@ -1,0 +1,8 @@
+{
+  "name": "input",
+  "framework": "vue",
+  "description": "Input de texto reutilizable",
+  "dependencies": {},
+  "registryDependencies": [],
+  "files": ["Input.vue"]
+}
