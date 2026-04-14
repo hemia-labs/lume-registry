@@ -1,0 +1,8 @@
+{
+  "name": "button",
+  "framework": "vue",
+  "description": "Botón reutilizable con variantes",
+  "dependencies": {},
+  "registryDependencies": [],
+  "files": ["Button.vue"]
+}

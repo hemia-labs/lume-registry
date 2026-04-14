@@ -1,0 +1,23 @@
+{
+  "name": "lume-registry",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build:registry": "tsx scripts/build-registry.ts",
+    "build:playground": "vite build",
+    "preview": "vite preview",
+    "dev:registry": "tsx watch scripts/build-registry.ts",
+    "serve:registry": "npx serve public/r"
+  },
+  "dependencies": {
+    "vue": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0"
+  }
+}
