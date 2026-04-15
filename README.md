@@ -1,27 +1,27 @@
 # lume-registry
 
-**Source of truth** for [Lume](https://github.com/hemia-labs/lume) components. Components are developed as real `.vue` files with a playground for visual development. A build script converts them to JSON so the Lume CLI can consume them via `fetch`.
+**Fuente de verdad** para componentes de [Lume](https://github.com/hemia-labs/lume). Los componentes se desarrollan como archivos `.vue` reales con un playground para desarrollo visual. Un script de build los convierte a JSON para que la CLI de Lume los consuma via `fetch`.
 
-## Project structure
+## Estructura del proyecto
 
 ```
 lume-registry/
 ├── src/
-│   ├── components/              # Real .vue components
+│   ├── components/              # Componentes .vue reales
 │   │   ├── button/
 │   │   │   ├── Button.vue
 │   │   │   └── meta.json
 │   │   └── input/
 │   │       ├── Input.vue
 │   │       └── meta.json
-│   └── playground/              # Vite + Vue app for local preview
+│   └── playground/              # App Vite + Vue para previsualización local
 │       ├── App.vue
 │       ├── main.ts
 │       └── index.html
 ├── scripts/
-│   └── build-registry.ts        # .vue → .json build script
+│   └── build-registry.ts        # Script de build .vue → .json
 ├── public/
-│   └── r/                       # Generated output (gitignored)
+│   └── r/                       # Output generado (gitignore)
 │       └── components/
 │           ├── index.json
 │           ├── button.json
@@ -31,52 +31,52 @@ lume-registry/
 └── package.json
 ```
 
-## Getting started
+## Primeros pasos
 
 ```bash
 npm install
 ```
 
-## Development
+## Desarrollo
 
-Run the playground with hot-module replacement:
+Ejecuta el playground con hot-module replacement:
 
 ```bash
 npm run dev
 ```
 
-Opens at `http://localhost:5173`. The sidebar lists all components in `src/components/`. Clicking one renders it in the preview area.
+Se abre en `http://localhost:5173`. La barra lateral lista todos los componentes en `src/components/`. Al hacer clic en uno, se renderiza en el área de previsualización.
 
-## Building the registry
+## Construyendo el registry
 
-Convert all `.vue` components to JSON:
+Convierte todos los componentes `.vue` a JSON:
 
 ```bash
 npm run build:registry
 ```
 
-This reads every `src/components/<name>/meta.json` and the `.vue` files listed there, embeds their content and writes:
+Esto lee cada `src/components/<name>/meta.json` y los archivos `.vue` listados ahí, embebe su contenido y escribe:
 
-- `public/r/components/<name>.json` — one file per component
-- `public/r/components/index.json` — list of all available components
+- `public/r/components/<name>.json` — un archivo por componente
+- `public/r/components/index.json` — lista de todos los componentes disponibles
 
-Watch mode (re-builds on every change):
+Modo watch (reconstruye en cada cambio):
 
 ```bash
 npm run dev:registry
 ```
 
-## Serving the registry locally
+## Sirviendo el registry localmente
 
 ```bash
 npm run serve:registry
 ```
 
-Serves the generated JSON at `http://localhost:3000/components/button.json`.
+Sirve el JSON generado en `http://localhost:3000/components/button.json`.
 
-## JSON schema
+## Schema JSON
 
-Each component JSON follows this schema:
+Cada component JSON sigue este schema:
 
 ```json
 {
@@ -105,23 +105,23 @@ Each component JSON follows this schema:
 }
 ```
 
-## How the Lume CLI consumes the registry
+## Cómo la CLI de Lume consume el registry
 
 ```ts
-// Set REGISTRY_URL to your deployed registry or use http://localhost:3000 for local testing
+// Configura REGISTRY_URL a tu registry desplegado o usa http://localhost:3000 para testing local
 const REGISTRY_URL = process.env.REGISTRY_URL ?? 'https://registry-ui.hemia.cloud';
 
 const res  = await fetch(`${REGISTRY_URL}/r/components/button.json`);
 const comp = await res.json();
 
-// comp.files → write each file to the user's project
-// comp.dependencies → install with npm/pnpm
+// comp.files → escribir cada archivo al proyecto del usuario
+// comp.dependencies → instalar con npm/pnpm
 ```
 
-## Adding a new component
+## Agregando un nuevo componente
 
-1. Create a directory under `src/components/<name>/`.
-2. Add a `meta.json`:
+1. Crea un directorio bajo `src/components/<name>/`.
+2. Agrega un `meta.json`:
    ```json
    {
      "name": "<name>",
@@ -132,20 +132,19 @@ const comp = await res.json();
      "files": ["<Name>.vue"]
    }
    ```
-3. Add the `.vue` file(s) listed in `meta.files`.
-4. Run `npm run dev` to preview, then `npm run build:registry` to generate the JSON.
+3. Agrega el archivo `.vue` (o archivos) listados en `meta.files`.
+4. Ejecuta `npm run dev` para previsualizar, luego `npm run build:registry` para generar el JSON.
 
-## Flow
+## Flujo
 
 ```
-Development                   Build                     Consumption (CLI)
+Desarrollo                   Build                     Consumo (CLI)
 ─────────────────────────     ───────────────────────   ──────────────────────────────
 src/components/button/        npm run build:registry    lume add button
   Button.vue  ──────────────► public/r/components/  ──► fetch(registry/r/button.json)
-  meta.json                     button.json              write Button.vue to project
-      │                                                  install dependencies
+  meta.json                     button.json              escribir Button.vue al proyecto
+      │                                                  instalar dependencias
       ▼
 Playground (Vite HMR)
 http://localhost:5173
 ```
-

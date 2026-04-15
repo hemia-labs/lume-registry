@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+
+@theme {
+  --color-lume-border: var(--lume-border);
+  --color-lume-background: var(--lume-background);
+  --color-lume-foreground: var(--lume-foreground);
+  --color-lume-primary: var(--lume-primary);
+  --color-lume-primary-foreground: var(--lume-primary-foreground);
+  --color-lume-secondary: var(--lume-secondary);
+  --color-lume-secondary-foreground: var(--lume-secondary-foreground);
+  --color-lume-muted: var(--lume-muted);
+  --color-lume-muted-foreground: var(--lume-muted-foreground);
+  --color-lume-accent: var(--lume-accent);
+  --color-lume-accent-foreground: var(--lume-accent-foreground);
+  --color-lume-card: var(--lume-card);
+  --color-lume-card-foreground: var(--lume-card-foreground);
+  --color-lume-input: var(--lume-input);
+  --color-lume-ring: var(--lume-ring);
+  --color-lume-destructive: var(--lume-destructive);
+  --color-lume-destructive-foreground: var(--lume-destructive-foreground);
+  --color-lume-success: var(--lume-success);
+  --color-lume-success-200: var(--lume-success-200);
+  --color-lume-warning: var(--lume-warning);
+  --color-lume-warning-200: var(--lume-warning-200);
+  --color-lume-info: var(--lume-info);
+  --color-lume-info-200: var(--lume-info-200);
+
+  --radius-sm: var(--lume-radius-sm);
+  --radius-md: var(--lume-radius-md);
+  --radius-lg: var(--lume-radius-lg);
+  --radius-xl: calc(var(--lume-radius) * 1.5);
+  --radius-2xl: calc(var(--lume-radius) * 2);
+  --radius-3xl: calc(var(--lume-radius) * 2.6);
+}
+
+:root {
+  --lume-radius-sm: 0.375rem;
+  --lume-radius-md: 0.5rem;
+  --lume-radius-lg: 0.75rem;
+  --lume-radius: 0.625rem;
+
+  --lume-primary: hsl(222.2 47.4% 11.2%);
+  --lume-primary-foreground: hsl(210 40% 98%);
+
+  --lume-secondary: hsl(210 40% 96.1%);
+  --lume-secondary-foreground: hsl(222.2 47.4% 11.2%);
+
+  --lume-destructive: hsl(0 84.2% 60.2%);
+  --lume-destructive-foreground: hsl(210 40% 98%);
+
+  --lume-muted: hsl(210 40% 96.1%);
+  --lume-muted-foreground: hsl(215.4 16.3% 46.9%);
+
+  --lume-accent: hsl(210 40% 96.1%);
+  --lume-accent-foreground: hsl(222.2 47.4% 11.2%);
+
+  --lume-border: hsl(214.3 31.8% 91.4%);
+  --lume-input: hsl(214.3 31.8% 91.4%);
+  --lume-ring: hsl(222.2 47.4% 11.2%);
+
+  --lume-background: hsl(0 0% 100%);
+  --lume-foreground: hsl(222.2 47.4% 11.2%);
+
+  --lume-card: hsl(0 0% 100%);
+  --lume-card-foreground: hsl(222.2 47.4% 11.2%);
+
+  --lume-success: hsl(142.1 76.2% 36.3%);
+  --lume-success-200: hsl(160 84% 43.2%);
+  --lume-warning: hsl(38 92.2% 50.2%);
+  --lume-warning-200: hsl(40 88.8% 53.6%);
+  --lume-info: hsl(199 89.4% 48.4%);
+  --lume-info-200: hsl(190 90% 53.6%);
+}
+
+[data-theme="dark"] {
+  --lume-primary: hsl(210 40% 98%);
+  --lume-primary-foreground: hsl(222.2 47.4% 11.2%);
+
+  --lume-secondary: hsl(217.2 32.6% 17.5%);
+  --lume-secondary-foreground: hsl(210 40% 98%);
+
+  --lume-destructive: hsl(0 62.8% 30.6%);
+  --lume-destructive-foreground: hsl(210 40% 98%);
+
+  --lume-muted: hsl(217.2 32.6% 17.5%);
+  --lume-muted-foreground: hsl(215 20.2% 65.1%);
+
+  --lume-accent: hsl(217.2 32.6% 17.5%);
+  --lume-accent-foreground: hsl(210 40% 98%);
+
+  --lume-border: hsl(217.2 32.6% 17.5%);
+  --lume-input: hsl(217.2 32.6% 17.5%);
+  --lume-ring: hsl(210 40% 98%);
+
+  --lume-background: hsl(222.2 84% 4.9%);
+  --lume-foreground: hsl(210 40% 98%);
+
+  --lume-card: hsl(222.2 84% 4.9%);
+  --lume-card-foreground: hsl(210 40% 98%);
+
+  --lume-success: hsl(160 84% 43.2%);
+  --lume-success-200: hsl(160 84% 53.2%);
+  --lume-warning: hsl(40 88.8% 53.6%);
+  --lume-warning-200: hsl(40 88.8% 63.6%);
+  --lume-info: hsl(190 90% 53.6%);
+  --lume-info-200: hsl(190 90% 63.6%);
+}
+
+@layer base {
+  * {
+    border-color: var(--lume-border);
+  }
+
+  html,
+  body,
+  #app {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !important;
+  }
+
+  body {
+    background-color: var(--lume-background);
+  }
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  * {
+    outline-color: color-mix(in oklab, var(--lume-ring) 50%, transparent);
+  }
+}
